@@ -1,0 +1,15 @@
+p {
+  font-family: Lato;
+}
+
+.table-responsive {
+  margin: auto;
+  width: 75%;
+  height: auto;
+}
+table {
+  position: relative;
+  text-align: left;
+  background: #20b5cf;
+  border-radius: 8px;
+}

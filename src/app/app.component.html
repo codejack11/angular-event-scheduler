@@ -1,0 +1,88 @@
+
+<!--    -->
+<div class="table-responsive">
+  <table class="table" >
+    <col width="20%">
+    <col width="65%">
+    <col width="15%">
+    <tr *ngFor="let event of events">
+      <td class="tab-one">
+        <b style="font-size:0.9vw;">{{event.setStartDate | date: "MMM dd, yyyy"}}</b>
+        <p style="font-size:0.9vw;">{{event.setSTime | date: "hh:mm a"}}<br>
+          {{event.setETime | date: "hh:mm a"}}
+        </p>
+        
+      </td>
+      <td >
+        <b style="font-size:1.5vw;">{{event.setTitle}}</b><br>
+        <p style="font-size:1vw;">{{event.setDiscription}}</p>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteEvent(event)" >Delete</button>
+      </td>
+    </tr>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">Add Event</button>
+</div>
+
+<br>
+
+ 
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Event</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+        <div class="container">
+          
+            <label for="title">Title</label>
+            <input type="text"
+              class="form-control"
+              [(ngModel)]="title">
+
+            <br>
+            <input type="checkbox" [(ngModel)]="checkbox" >
+            <label for="allday">All Day</label>
+            <br>
+
+            <label>Starts</label>
+            <div class=" form-group">
+                <input type="text" class="form-control" placeholder="Date" #dp="bsDatepicker" bsDatepicker [bsValue]="bsValue" [(ngModel)]="bsValue" [bsConfig]="{dateInputFormat: 'MMM DD, YYYY'}" >
+
+                
+              </div>
+            <div class="row">
+              
+              <div class="col-6 form-group">
+                <timepicker [(ngModel)]="stime" [disabled]="checkbox" ></timepicker>
+              </div>
+              
+              <div class="col-6 form-group">
+                <timepicker [(ngModel)]="etime" [disabled]="checkbox"></timepicker>
+              </div>
+            </div>
+            <hr>
+            <h4>Event Details</h4>
+            <label for="discription">Discription</label>
+            <textarea class="form-control" [(ngModel)]='discription'></textarea>
+            <br>
+        </div>
+      
+      <div class="modal-footer">
+        <!--
+        <button class="btn btn-success"
+          [disabled]="!myForm.valid">
+          Submit Form
+        </button>
+        -->
+        <button type="button" class="btn btn-primary" (click)="confirm()" [disabled]="!title">Add</button>
+      </div>
+   
+    
+  </div>
+</ng-template>
+
