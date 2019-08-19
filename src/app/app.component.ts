@@ -2,7 +2,6 @@ import { Component, TemplateRef, ViewChild, ElementRef, NgZone, OnInit } from '@
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap';
-import { MapsAPILoader, MouseEvent } from '@agm/core';
 
 @Component({
   selector: 'my-app',
