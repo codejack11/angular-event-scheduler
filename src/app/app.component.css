@@ -1,15 +1,21 @@
-p {
-  font-family: Lato;
+table {
+  width: 100%;
+}
+.mat-column-position {
+  width: 20%;
 }
 
-.table-responsive {
-  margin: auto;
-  width: 75%;
-  height: auto;
+.mat-column-name {
+  margin-top: none;
+  scroll-margin-left: 1em;
+  
 }
-table {
-  position: relative;
-  text-align: left;
-  background: #20b5cf;
-  border-radius: 8px;
+
+.mat-column-symbol {
+  width: 10%;
+}
+
+td.footer {
+  font-style: italic;
+  text-align: center;
 }

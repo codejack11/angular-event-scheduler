@@ -7,6 +7,7 @@ import { HelloComponent } from './hello.component';
 
 import { ModalModule, BsDatepickerModule, TimepickerModule  } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule, MatButtonModule, MatListModule, MatTableModule } from '@angular/material';
 
 @NgModule({
   imports:      [ BrowserModule, 
@@ -15,7 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
                   BrowserAnimationsModule,
                   BsDatepickerModule.forRoot(),
                   TimepickerModule.forRoot(),
-                  ModalModule.forRoot()
+                  ModalModule.forRoot(),
+                  MatListModule,
+                  MatIconModule, 
+                  MatButtonModule,
+                  MatTableModule
                   ],
                   
   declarations: [ AppComponent, HelloComponent ],

@@ -1,33 +1,57 @@
 
 <!--    -->
-<div class="table-responsive">
-  <table class="table" >
-    <col width="20%">
-    <col width="65%">
-    <col width="15%">
-    <tr *ngFor="let event of events">
-      <td class="tab-one">
-        <b style="font-size:0.9vw;">{{event.setStartDate | date: "MMM dd, yyyy"}}</b>
-        <p style="font-size:0.9vw;">{{event.setSTime | date: "hh:mm a"}}<br>
-          {{event.setETime | date: "hh:mm a"}}
-        </p>
-        
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.data.length != 0">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Time </th>
+    <td mat-cell *matCellDef="let element">
+      <p>{{element.eventDate | date: "MMM dd, yyyy"}}<br>
+      {{element.startTime | date: "hh:mm a"}}<br>
+      {{element.startTime | date: "hh:mm a"}}</p>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Event </th>
+    <td mat-cell *matCellDef="let element">
+      <b>{{element.title}}</b>
+      <p mat-subheader>{{element.description}}</p>
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element; let i = index">
+      <button mat-icon-button aria-label="delete icon" (click)="deleteEvent(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="footerMessage">
+      <td mat-footer-cell *matFooterCellDef colspan="4" class="footer"> 
+        {{dataSource.data && dataSource.data.length ? dataSource.data.length : 'No'}} event(s) added
       </td>
-      <td >
-        <b style="font-size:1.5vw;">{{event.setTitle}}</b><br>
-        <p style="font-size:1vw;">{{event.setDiscription}}</p>
-      </td>
-      <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteEvent(event)" >Delete</button>
-      </td>
-    </tr>
-  </table>
-  <button type="button" class="btn btn-primary" (click)="openModal(template)">Add Event</button>
-</div>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="['footerMessage']" ></tr>
+</table>
+<!------- Modal --->
 
 <br>
+ <button mat-raised-button  (click)="openModal(template)" color="accent">
+    <mat-icon color="warn" aria-label="add icon">add</mat-icon> Add Event
+  </button>
 
- 
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">New Event</h4>
@@ -67,8 +91,8 @@
             </div>
             <hr>
             <h4>Event Details</h4>
-            <label for="discription">Discription</label>
-            <textarea class="form-control" [(ngModel)]='discription'></textarea>
+            <label for="description">Description</label>
+            <textarea class="form-control" [(ngModel)]='description'></textarea>
             <br>
         </div>
       
@@ -79,7 +103,7 @@
           Submit Form
         </button>
         -->
-        <button type="button" class="btn btn-primary" (click)="confirm()" [disabled]="!title">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addItem()" [disabled]="!title">Add</button>
       </div>
    
     
